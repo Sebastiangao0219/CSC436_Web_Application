@@ -1,38 +1,41 @@
-
 import UserBar from "./users/UserBar";
-import AddTodoTask from "./posts/AddTodoTask";
-import TodoList from "./posts/TodoList";
+import AddTodoTask from "./todos/AddTodoTask";
+import TodoList from "./todos/TodoList";
+import React, {useReducer} from "react";
+import appReducer from "../hooks/Reducers";
 
 function App() {
-    const posts = [
+    const initialTodos = [
         {
             title: "Todo-1.",
-            description: "Some text",
+            content: "Some text",
             dateCreated: new Date(Date.now()).toLocaleString(),
             completed: true,
             dateCompleted: new Date(Date.now()).toLocaleString()
         },
         {
             title: "Todo-2.",
-            description: "Some text text",
+            content: "Some text text",
             dateCreated: new Date(Date.now()).toLocaleString(),
             completed: true,
             dateCompleted: new Date(Date.now()).toLocaleString()
-        },{
+        }, {
             title: "Todo-3.",
-            description: "Some text text text",
+            content: "Some text text text",
             dateCreated: new Date(Date.now()).toLocaleString(),
             completed: true,
             dateCompleted: new Date(Date.now()).toLocaleString()
         }
     ]
+    const [state, dispatch] = useReducer(appReducer, {user: '', todos: initialTodos});
+    const {user, todos} = state;
+
     return (
         <div>
-            <UserBar/>
-            {/*<Todo title="Hello World" content="My First Todo~!" author="Sebastian"/>*/}
-            <AddTodoTask user="Sebastian"/>
-            <TodoList posts={posts}/>
-            {/*<MyName/>*/}
+            <UserBar user={user} dispatchUser={dispatch}/>
+            {user && <AddTodoTask user={user} dispatch={dispatch}/>}
+            {/*<TodoList todos={todos}/>*/}
+            <TodoList todos={todos} dispatch={dispatch}/>
         </div>
     );
 }
