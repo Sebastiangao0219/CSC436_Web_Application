@@ -10,21 +10,21 @@ function App() {
             title: "Todo-1.",
             content: "Some text",
             dateCreated: new Date(Date.now()).toLocaleString(),
-            completed: true,
-            dateCompleted: new Date(Date.now()).toLocaleString()
+            completed: false,
+            dateCompleted:''
         },
         {
             title: "Todo-2.",
             content: "Some text text",
             dateCreated: new Date(Date.now()).toLocaleString(),
-            completed: true,
-            dateCompleted: new Date(Date.now()).toLocaleString()
+            completed: false,
+            dateCompleted: ''
         }, {
             title: "Todo-3.",
             content: "Some text text text",
             dateCreated: new Date(Date.now()).toLocaleString(),
-            completed: true,
-            dateCompleted: new Date(Date.now()).toLocaleString()
+            completed: false,
+            dateCompleted: ''
         }
     ]
     const [state, dispatch] = useReducer(appReducer, {user: '', todos: initialTodos});

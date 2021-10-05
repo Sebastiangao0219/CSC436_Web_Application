@@ -24,10 +24,11 @@ function todoReducer (state, action) {
         case 'TOGGLE_TODO':
             return state.map(todo => {
                 if (todo.title !== action.title) {
-                    return todo;
+                    todo.completed = !action.completed;
                 }
-                return {...todo, completed: !todo.completed};
+                return todo;
             })
+
         case 'DELETE_TODO':
             const updatedTodos = state.filter((todo) => todo.title !== action.title);
             return updatedTodos;

@@ -1,7 +1,16 @@
-import React, {useState}from 'react';
+import React from 'react';
 
-function Todo({title, content, dateCreated, completed, dateCompleted}) {
+function Todo({ title, content, dateCreated, completed, dateCompleted, dispatch}) {
 
+    function handleDelete(e) {
+        e.preventDefault();
+        dispatch({type: "DELETE_TODO", title})
+    }
+
+    function handleToggle() {
+        // e.preventDefault();
+        dispatch({type: "TOGGLE_TODO", title})
+    }
     if (completed) {
         return (
             <div>
@@ -9,6 +18,8 @@ function Todo({title, content, dateCreated, completed, dateCompleted}) {
                 <div>{content}</div>
                 <div>Created at: {new Date(Date.now()).toLocaleString()}</div>
                 <div>Completed at: {new Date(Date.now()).toLocaleString()}</div>
+                <button onClick={e => handleDelete(e)}>Delete</button>
+                <input type="checkbox" onClick={handleToggle} />
             </div>
         )
     } else {
@@ -18,6 +29,8 @@ function Todo({title, content, dateCreated, completed, dateCompleted}) {
                 <div>{content}</div>
                 <div>Created at <b>{new Date(Date.now()).toLocaleString()}</b></div>
                 <div>Completed: {completed ? 'Yes' : 'No'}</div>
+                <button onClick={e => handleDelete(e)}>Delete</button>
+                <input type="checkbox" onClick={handleToggle} />
             </div>
         );
     }
