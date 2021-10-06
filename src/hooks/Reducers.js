@@ -30,8 +30,7 @@ function todoReducer (state, action) {
             })
 
         case 'DELETE_TODO':
-            const updatedTodos = state.filter((todo) => todo.title !== action.title);
-            return updatedTodos;
+            return state.filter((todo) => todo.title !== action.title);
         default:
             return state;
     }

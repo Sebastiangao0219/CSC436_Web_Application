@@ -34,7 +34,6 @@ function App() {
         <div>
             <UserBar user={user} dispatchUser={dispatch}/>
             {user && <AddTodoTask user={user} dispatch={dispatch}/>}
-            {/*<TodoList todos={todos}/>*/}
             <TodoList todos={todos} dispatch={dispatch}/>
         </div>
     );

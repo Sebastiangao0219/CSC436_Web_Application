@@ -9,7 +9,7 @@ function Todo({ title, content, dateCreated, completed, dateCompleted, dispatch}
 
     function handleToggle() {
         // e.preventDefault();
-        dispatch({type: "TOGGLE_TODO", title})
+        dispatch({type: "TOGGLE_TODO", title, completed})
     }
     if (completed) {
         return (
