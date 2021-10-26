@@ -11,7 +11,7 @@ function App() {
             content: "Some text",
             dateCreated: new Date(Date.now()).toLocaleString(),
             completed: false,
-            dateCompleted:''
+            dateCompleted: ''
         },
         {
             title: "Todo-2.",

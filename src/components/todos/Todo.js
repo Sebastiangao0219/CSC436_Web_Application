@@ -1,24 +1,24 @@
 import React from 'react';
 
-function Todo({ title, content, dateCreated, completed, dateCompleted, dispatch}) {
+function Todo({ title, content, completedOn, complete, dateCompleted, dispatch, todoId}) {
 
-    function handleDelete(e) {
-        e.preventDefault();
-        dispatch({type: "DELETE_TODO", title})
+    function handleDelete() {
+        dispatch({type: 'DELETE_TODO', todoId: todoId})
     }
 
     function handleToggle() {
-        dispatch({type: "TOGGLE_TODO", title, completed})
+        dispatch({type: 'TOGGLE_TODO', title, complete, todoId: todoId})
     }
-    if (completed) {
+    if (complete) {
         return (
             <div>
                 <h3>{title}</h3>
                 <div>{content}</div>
-                <div>Created at: {new Date(Date.now()).toLocaleString()}</div>
-                <div>Completed at: {new Date(Date.now()).toLocaleString()}</div>
-                <button onClick={e => handleDelete(e)}>Delete</button>
+                <div>Created at: {new Date(Date.now(completedOn)).toLocaleString('en-us')}</div>
+                <div>Completed on: {new Date(Date.now(completedOn)).toLocaleString('en-us')}</div>
+                <button onClick={handleDelete}>Delete Todo</button>
                 <input type="checkbox" onClick={handleToggle} />
+                <hr/>
             </div>
         )
     } else {
@@ -26,10 +26,11 @@ function Todo({ title, content, dateCreated, completed, dateCompleted, dispatch}
             <div>
                 <h3>{title}</h3>
                 <div>{content}</div>
-                <div>Created at <b>{new Date(Date.now()).toLocaleString()}</b></div>
-                <div>Completed: {completed ? 'Yes' : 'No'}</div>
-                <button onClick={e => handleDelete(e)}>Delete</button>
+                <div>Created at <b>{new Date(Date.now(completedOn)).toLocaleString('en-us')}</b></div>
+                <div>Completed: {complete ? 'Yes' : 'No'}</div>
+                <button onClick={handleDelete}>Delete Todo</button>
                 <input type="checkbox" onClick={handleToggle} />
+                <hr/>
             </div>
         );
     }

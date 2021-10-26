@@ -18,19 +18,22 @@ function todoReducer (state, action) {
                 title: action.title,
                 content: action.content,
                 author: action.author,
-                completed: action.completed
+                complete: false,
+                completedOn: undefined,
             }
             return [ newTodo, ...state ]
         case 'TOGGLE_TODO':
-            return state.map(todo => {
-                if (todo.title === action.title) {
-                    todo.completed = !action.completed;
+            return state.map((t, i) => {
+                if (i === action.todoId) {
+                    t.complete = action.complete;
+                    t.completeOn = Date.now();
+                    console.log(t);
                 }
-                return todo;
+                return t;
             });
 
         case 'DELETE_TODO':
-            return state.filter((todo) => todo.title !== action.title);
+            return state.filter((t, i) => i !== action.todoId);
         default:
             return state;
     }

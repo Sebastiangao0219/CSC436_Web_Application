@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 
-// function Register( {setUser} ) {
-function Register({dispatchUser}) {
+function Register({dispatchUser, ACTIONS}) {
 
     const [formData, setFormData] = useState({
         username: "",
@@ -9,7 +8,7 @@ function Register({dispatchUser}) {
         passwordRepeat: ""
     })
     return (
-        <form onSubmit={e => {e.preventDefault();dispatchUser({type: 'REGISTER', username: formData.username});}}>
+        <form onSubmit={e => {e.preventDefault();dispatchUser({type: ACTIONS.REGISTER, username: formData.username});}}>
             <label htmlFor="register-username">Username:</label>
             <input type="text" value={formData.username}
                    onChange={e => setFormData({...formData, username: e.target.value})} name="register-username"

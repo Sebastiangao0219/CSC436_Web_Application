@@ -11,7 +11,8 @@ function TodoList({todos = [], dispatch}) {
                           title={todo.title}
                           author={todo.author}
                           content={todo.content}
-                          key={'todo-' + i}/>
+                          key={'todo-' + i}
+                          todoId={i}/>
                 </div>
             )}
         </div>

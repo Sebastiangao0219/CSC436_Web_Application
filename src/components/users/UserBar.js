@@ -9,8 +9,8 @@ function UserBar({user, dispatchUser}) {
     } else {
         return (
             <div>
-                <Login dispatchUser={dispatchUser} />
-                <Register dispatchUser={dispatchUser} />
+                <Login dispatchUser={dispatchUser}/>
+                <Register dispatchUser={dispatchUser}/>
             </div>
         );
     }
