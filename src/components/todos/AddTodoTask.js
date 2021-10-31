@@ -11,7 +11,7 @@ function AddTodoTask({user, dispatch}) {
     }
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch({type: 'CREATE_TODO', title, content, author: user, complete: false})
+        dispatch({type: 'CREATE_TODO', title, content, author: user})
     }
     return (
         <form onSubmit={e => {handleSubmit(e)}}>

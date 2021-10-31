@@ -34,6 +34,8 @@ function todoReducer (state, action) {
 
         case 'DELETE_TODO':
             return state.filter((t, i) => i !== action.todoId);
+        case 'FETCH_TODOS' :
+            return action.todos;
         default:
             return state;
     }
