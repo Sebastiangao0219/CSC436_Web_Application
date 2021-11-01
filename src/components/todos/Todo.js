@@ -1,16 +1,37 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ThemeContext, StateContext } from "../hooks/Contexts";
+import { useResource } from "react-request-hook";
 
 function Todo({ title, content, completedOn, complete, todoId }) {
   const { secondaryColor } = useContext(ThemeContext);
   const { dispatch } = useContext(StateContext);
-  function handleDelete() {
-    dispatch({ type: "DELETE_TODO", todoId: todoId });
-  }
 
-  function handleToggle() {
-    dispatch({ type: "TOGGLE_TODO", complete: !complete, todoId: todoId });
-  }
+  const [deletedTodo, deleteTodo] = useResource((todoId) => ({
+    url: `/todos/${todoId}`,
+    method: "delete"
+  }));
+
+  const [toggledTodo, toggleTodo] = useResource((todoId, completed) => ({
+    url: `/todos/${todoId}`,
+    method: "patch",
+    data: {
+      complete: completed,
+      completedOn: Date.now()
+    }
+  }));
+
+  useEffect(() => {
+    if (deletedTodo && deletedTodo.data) {
+      dispatch({ type: 'DELETE_TODO', todoId: todoId });
+    }
+  }, [deletedTodo]);
+
+  useEffect(() => {
+    if (toggledTodo) {
+      dispatch({ type: 'TOGGLE_TODO', complete:toggledTodo.complete, completedOn: toggledTodo.completed, todoId: todoId });
+    }
+  }, [toggledTodo]);
+
   return (
     <div>
       <h3 style={{ color: secondaryColor }}>{title}</h3>
@@ -21,8 +42,9 @@ function Todo({ title, content, completedOn, complete, todoId }) {
       {complete && <div>
         Completed on: {new Date(Date.now(completedOn)).toLocaleString("en-us")}
       </div>}
-      <button onClick={handleDelete}>Delete Todo</button>
-      <input type="checkbox" onClick={handleToggle} />
+      <input type="checkbox" checked={complete} onClick={e => {toggleTodo(todoId, e.target.checked)}} />
+      <button onClick={(e) => (deleteTodo(todoId))}>Delete Todo</button>
+      
       <hr />
     </div>
   );

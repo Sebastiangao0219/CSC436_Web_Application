@@ -1,20 +1,36 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
+import { StateContext } from '../hooks/Contexts'
+import { useResource } from "react-request-hook";
 
-function AddTodoTask({user, dispatch}) {
+function AddTodoTask() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [todo, createTodo ] = useResource(({title, content, author}) => ({
+        url: '/todos',
+        method: 'post',
+        data: {title, content, author}
+    }))
+    const {state, dispatch} = useContext(StateContext)
+    const {user} = state;
     function handleTitle(evt) {
         setTitle(evt.target.value);
     }
     function handleContent(evt) {
         setContent(evt.target.value);
     }
-    function handleSubmit(e) {
-        e.preventDefault();
-        dispatch({type: 'CREATE_TODO', title, content, author: user})
+    function handleCreate () {
+        createTodo({title, content, author: user});
+        
     }
+
+    useEffect(() => {
+        if (todo && todo.data) {
+            dispatch({ type: 'CREATE_TODO', title: todo.data.title, content: todo.data.content, id: todo.data.id, author: user});
+        }
+    },[todo])
+    
     return (
-        <form onSubmit={e => {handleSubmit(e)}}>
+        <form onSubmit={e => {e.preventDefault(); handleCreate();}}>
             <div>Author: <b>{user}</b></div>
             <div>
                 <label htmlFor="create-title">Title: </label>

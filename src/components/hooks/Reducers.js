@@ -15,6 +15,7 @@ function todoReducer (state, action) {
     switch (action.type) {
         case 'CREATE_TODO':
             const newTodo = {
+                id: action.id,
                 title: action.title,
                 content: action.content,
                 author: action.author,
@@ -23,17 +24,16 @@ function todoReducer (state, action) {
             }
             return [ newTodo, ...state ]
         case 'TOGGLE_TODO':
-            return state.map((t, i) => {
-                if (i === action.todoId) {
+            return state.map((t) => {
+                if (t.id === action.todoId) {
                     t.complete = action.complete;
                     t.completeOn = Date.now();
-                    console.log(t);
                 }
                 return t;
             });
 
         case 'DELETE_TODO':
-            return state.filter((t, i) => i !== action.todoId);
+            return state.filter((t) => t.id !== action.todoId);
         case 'FETCH_TODOS' :
             return action.todos;
         default:
