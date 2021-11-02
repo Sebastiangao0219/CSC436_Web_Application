@@ -1,41 +1,10 @@
 {
   "todos": [
     {
-      "id": 5,
-      "title": "Todo-5",
-      "content": "Test Post",
-      "author": "Liang",
-      "complete": false,
-      "completedOn": null
-    },
-    {
-      "title": "",
-      "content": "",
-      "id": 6
-    },
-    {
-      "title": "",
-      "content": "",
-      "author": "sun",
-      "id": 7
-    },
-    {
-      "title": "Oct-31",
-      "content": "Got an offer",
-      "author": "Sebastian",
-      "id": 8
-    },
-    {
-      "title": "test1",
-      "content": "teste1teste1=1teste1",
-      "author": "sun",
-      "id": 9
-    },
-    {
       "title": "teste2",
-      "content": "teste2 test2",
-      "author": "sun",
-      "id": 10
+      "content": "teste3",
+      "author": "Sebastian",
+      "id": 3
     }
   ],
   "users": [

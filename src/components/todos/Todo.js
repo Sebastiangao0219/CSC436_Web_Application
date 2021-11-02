@@ -7,10 +7,10 @@ function Todo({ title, content, completedOn, complete, todoId }) {
   const { dispatch } = useContext(StateContext);
 
   const [deletedTodo, deleteTodo] = useResource((todoId) => ({
-    url: `/todos/${todoId}`,
+    url: `/todos/${todoId + 1}`,
     method: "delete"
   }));
-
+  console.log(todoId);
   const [toggledTodo, toggleTodo] = useResource((todoId, completed) => ({
     url: `/todos/${todoId}`,
     method: "patch",
@@ -21,14 +21,14 @@ function Todo({ title, content, completedOn, complete, todoId }) {
   }));
 
   useEffect(() => {
-    if (deletedTodo && deletedTodo.data) {
+    if (deletedTodo && deletedTodo.data && deletedTodo.isLoading === false) {
       dispatch({ type: 'DELETE_TODO', todoId: todoId });
     }
   }, [deletedTodo]);
 
   useEffect(() => {
-    if (toggledTodo) {
-      dispatch({ type: 'TOGGLE_TODO', complete:toggledTodo.complete, completedOn: toggledTodo.completed, todoId: todoId });
+    if (toggledTodo && toggledTodo.data && toggledTodo.isLoading === false) {
+      dispatch({ type: 'TOGGLE_TODO', complete:toggledTodo.data.complete, completedOn: toggledTodo.data.completeOn, todoId });
     }
   }, [toggledTodo]);
 
