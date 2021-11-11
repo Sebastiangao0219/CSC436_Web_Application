@@ -5,7 +5,7 @@ import { StateContext } from '../hooks/Contexts'
 function Logout() {
     const { state, dispatch } = useContext(StateContext);
     return (
-        <form onSubmit={e => {e.preventDefault();dispatch({type: 'LOGOUT'});}}>
+        <form onSubmit={e => {e.preventDefault(); dispatch({type: 'LOGOUT'});}}>
             Logged in as: <b>{state.user}</b>
             <input type="submit" value="Logout"/>
         </form>

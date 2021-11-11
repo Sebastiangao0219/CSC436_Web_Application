@@ -11,11 +11,12 @@ function TodoList() {
       {todos.map((t, i) => (
         <Todo
           {...t}
+          short={true}
           title={t.title}
           author={t.author}
           content={t.content}
           key={"todo-" + i}
-          todoId={i}
+          todoId={t.id}
         />
       ))}
     </div>
