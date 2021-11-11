@@ -5,6 +5,7 @@ import { ThemeContext, StateContext } from "../components/hooks/Contexts";
 import { Link } from "react-navi";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import ChangeTheme from "../components/ChangeTheme";
+import logo from "../assets/logo.png";
 
 function HeaderBar({ setTheme }) {
   const theme = useContext(ThemeContext);
@@ -14,6 +15,13 @@ function HeaderBar({ setTheme }) {
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="/">
+          <img
+            src={logo}
+            width="56"
+            height="40"
+            className="d-inline-block align-top"
+            alt="Sebastian's Todo List"
+          />
           <Header text="Sebastian's Todo List" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

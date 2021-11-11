@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-navi";
 import { ThemeContext, StateContext } from "../hooks/Contexts";
 import { useResource } from "react-request-hook";
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 function Todo({
   title,
   content,
@@ -55,7 +55,7 @@ function Todo({
   }, [toggledTodo]);
 
   return (
-    <Card>
+    <Card style={{backgroundColor: "#ffb5b5"}}>
       <Card.Body>
         <Card.Title>
           <Link style={{ color: secondaryColor }} href={`/todo/${todoId}`}>
@@ -68,35 +68,13 @@ function Todo({
           </i>
         </Card.Subtitle>
         <Card.Text>{processedContent}</Card.Text>
-        {short && <Link href={`/todo/${todoId}`}>View Full Content</Link>}
+        {short && (
+          <Button variant="info" href={`/todo/${todoId}`}>
+            View Full Content
+          </Button>
+        )}
       </Card.Body>
     </Card>
-
-    // <div>
-    //   <Link href={`/todo/${todoId}`}>
-    //     <h3 style={{ color: secondaryColor }}>{title}</h3>
-    //   </Link>
-    //   <div>{processedContent}</div>
-    //   <div>
-    //     Created at: {new Date(Date.now(completedOn)).toLocaleString("en-us")}
-    //   </div>
-    //   <input
-    //     type="checkbox"
-    //     checked={complete}
-    //     onClick={(e) => {
-    //       toggleTodo(todoId, e.target.checked);
-    //     }}
-    //   />
-    //   <button onClick={(e) => deleteTodo(todoId)}>Delete Todo</button>
-    //   {complete && <><br /><i>Completed on:{new Date(Date.now(completedOn)).toLocaleString("en-us")}</i></>}
-    //   {short && (
-    //     <div>
-    //       <br />
-    //       <Link href={`/todo/${todoId}`}>View Full Todo</Link>
-    //     </div>
-    //   )}
-    //   <hr />
-    // </div>
   );
 }
 

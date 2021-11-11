@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import { Link } from 'react-navi';
+import {Button} from 'react-bootstrap'
 import { useResource } from 'react-request-hook';
 import Todo from '../components/todos/Todo';
 
@@ -16,7 +17,7 @@ function TodoPage ({ id }) {
                 ? <Todo {...todo.data} />
                 : 'Loading...'
             }
-            <div><Link href='/'>Go Back</Link></div>
+            <div><Button style={{marginTop: 5}} href='/'>Go Back</Button></div>
         </div>
     )
 }

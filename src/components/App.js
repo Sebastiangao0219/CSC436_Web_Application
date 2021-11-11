@@ -26,8 +26,10 @@ function App() {
   const [state, dispatch] = useReducer(appReducer, { user: "", todos: [] });
   const { user } = state;
 
+  
+
   return (
-    <div>
+    <div style={{backgroundColor: "#c4b054"}}>
       <ThemeContext.Provider value={theme}>
         <StateContext.Provider value={{ state: state, dispatch: dispatch }}>
           <Router routes={routes}>

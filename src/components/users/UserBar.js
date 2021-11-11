@@ -15,11 +15,11 @@ function UserBar() {
   } else {
     return (
       <div className="justify-content-end">
-        <Button variant="link" onClick={(e) => setShowLogin(true)}>
+        <Button style={{marginRight: 6}} variant="primary" onClick={(e) => setShowLogin(true)}>
           Login
         </Button>
         <Login show={showLogin} handleClose={() => setShowLogin(false)} />
-        <Button variant="link" onClick={(e) => setShowRegister(true)}>
+        <Button variant="primary" onClick={(e) => setShowRegister(true)}>
           Register
         </Button>
         <Register
