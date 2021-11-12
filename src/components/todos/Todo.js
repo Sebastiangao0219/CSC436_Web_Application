@@ -3,6 +3,7 @@ import { Link } from "react-navi";
 import { ThemeContext, StateContext } from "../hooks/Contexts";
 import { useResource } from "react-request-hook";
 import { Card, Button } from "react-bootstrap";
+import todoBackground from "../../assets/header.png"
 function Todo({
   title,
   content,
@@ -12,6 +13,10 @@ function Todo({
   todoId,
   short = false,
 }) {
+  const todoBackgroundImage = {
+    backgroundImage: `url(${todoBackground})`,
+    opacity: 0.5
+  }
   const { secondaryColor } = useContext(ThemeContext);
   const { dispatch } = useContext(StateContext);
 
@@ -55,21 +60,21 @@ function Todo({
   }, [toggledTodo]);
 
   return (
-    <Card style={{backgroundColor: "#ffb5b5"}}>
-      <Card.Body>
+    <Card >
+      <Card.Body >
         <Card.Title>
-          <Link style={{ color: secondaryColor }} href={`/todo/${todoId}`}>
+          <Link style={{ color: '#19181a' }} href={`/todo/${todoId}`}>
             {title}
           </Link>
         </Card.Title>
         <Card.Subtitle>
-          <i>
+          <i style={{color: "#19181a"}}>
             Created by <b>{author}</b>
           </i>
         </Card.Subtitle>
-        <Card.Text>{processedContent}</Card.Text>
+        <Card.Text >{processedContent}</Card.Text>
         {short && (
-          <Button variant="info" href={`/todo/${todoId}`}>
+          <Button variant="blank" href={`/todo/${todoId}`} style={{backgroundColor: '#90ccf4'}}>
             View Full Content
           </Button>
         )}

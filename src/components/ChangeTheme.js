@@ -33,7 +33,7 @@ export default function ChangeTheme ({ theme, setTheme }) {
   function isActive (t) { return t.primaryColor === theme.primaryColor && t.secondaryColor === theme.secondaryColor }
   return ( <>
        {isLoading && ' Loading themes...'}
-       <NavDropdown title="ChangeTheme" id="nav-dropdown">
+       <NavDropdown title="ChangeTheme" id="nav-dropdown" style={{color: '#19181a'}}>
           {data && data.map((t, i) =>
                   <NavDropdown.Item eventKey="4.2">
                   <ThemeItem key={'theme-' + i} theme={t} active={isActive(t)} onClick={() => setTheme(t)} />
