@@ -31,13 +31,6 @@ function HeaderBar({ setTheme }) {
             />
             {/* <Header text="Sebastian's Todo List" /> */}
           </Navbar.Brand>
-          {/* <img
-              src={header}
-              width="156"
-              height="50"
-              className="d-inline-block align-top"
-              alt="Sebastian's Todo List"
-            /> */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -48,7 +41,6 @@ function HeaderBar({ setTheme }) {
               )}
               {/* <ChangeTheme theme={theme} setTheme={setTheme} /> */}
             </Nav>
-            {/* <Header text="Sebastian's Todo List" /> */}
             <React.Suspense fallback={"Loading..."}>
               <UserBar />
             </React.Suspense>

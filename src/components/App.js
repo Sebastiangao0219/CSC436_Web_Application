@@ -5,6 +5,7 @@ import { ThemeContext, StateContext } from "./hooks/Contexts";
 import HeaderBar from "../pages/HeaderBar";
 import HomePage from "../pages/HomePage";
 import TodoPage from "../pages/TodoPage";
+import UsersPage from "../pages/UsersPage";
 import CreateTodo from "./todos/CreateTodo";
 import { Router, View } from "react-navi";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,6 +23,7 @@ function App() {
     "/todo/:id": route((req) => {
       return { view: <TodoPage id={req.params.id} /> };
     }),
+    "/users": route({ view: <UsersPage /> })
   });
 
   const [state, dispatch] = useReducer(appReducer, { user: "", todos: [] });
@@ -31,8 +33,6 @@ function App() {
     backgroundImage: `url(${background})`
   }
 
-  
-
   return (
     <div style={ backgroundImage }>
       <ThemeContext.Provider value={theme}>
@@ -40,7 +40,7 @@ function App() {
           <Router routes={routes}>
             <Container>
               <HeaderBar setTheme={setTheme} />
-              <hr />
+              <br />
               <View />
             </Container>
           </Router>

@@ -1,10 +1,21 @@
+
 function userReducer(state, action) {
   switch (action.type) {
     case "LOGIN":
+
     case "REGISTER":
-      return action.username;
+      const newUser = {
+        id: action.id,
+        username: action.username,
+      };
+      return [newUser, ...state];
+
+    // case "REGISTER":
+    //   return action.username;
     case "LOGOUT":
       return "";
+    case "FETCH_USERS":
+      return action.users;
     default:
       return state;
   }
@@ -42,7 +53,7 @@ function todoReducer(state, action) {
 
 export default function appReducer(state, action) {
   return {
-    user: userReducer(state.user, action),
+    users: userReducer(state.users, action),
     todos: todoReducer(state.todos, action),
   };
 }

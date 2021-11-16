@@ -13,10 +13,6 @@ function Todo({
   todoId,
   short = false,
 }) {
-  const todoBackgroundImage = {
-    backgroundImage: `url(${todoBackground})`,
-    opacity: 0.5
-  }
   const { secondaryColor } = useContext(ThemeContext);
   const { dispatch } = useContext(StateContext);
 
@@ -63,18 +59,18 @@ function Todo({
     <Card >
       <Card.Body >
         <Card.Title>
-          <Link style={{ color: '#19181a' }} href={`/todo/${todoId}`}>
+          <Link style={{ color: '#000000' }} href={`/todo/${todoId}`}>
             {title}
           </Link>
         </Card.Title>
         <Card.Subtitle>
-          <i style={{color: "#19181a"}}>
+          <i style={{color: "#000000"}}>
             Created by <b>{author}</b>
           </i>
         </Card.Subtitle>
         <Card.Text >{processedContent}</Card.Text>
         {short && (
-          <Button variant="blank" href={`/todo/${todoId}`} style={{backgroundColor: '#90ccf4'}}>
+          <Button variant="blank" href={`/todo/${todoId}`} style={{backgroundColor: '#94b0ab'}}>
             View Full Content
           </Button>
         )}
