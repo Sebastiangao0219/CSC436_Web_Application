@@ -6,7 +6,9 @@ import HeaderBar from "../pages/HeaderBar";
 import HomePage from "../pages/HomePage";
 import TodoPage from "../pages/TodoPage";
 import UsersPage from "../pages/UsersPage";
+import ProfilePage from "../pages/ProfilePage";
 import CreateTodo from "./todos/CreateTodo";
+
 import { Router, View } from "react-navi";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
@@ -23,10 +25,13 @@ function App() {
     "/todo/:id": route((req) => {
       return { view: <TodoPage id={req.params.id} /> };
     }),
-    "/users": route({ view: <UsersPage /> })
+    "/users": route({ view: <UsersPage /> }),
+    "/users/:id": route((req) => {
+      return { view: <ProfilePage id={req.params.id} /> };
+    }),
   });
 
-  const [state, dispatch] = useReducer(appReducer, { user: "", todos: [] });
+  const [state, dispatch] = useReducer(appReducer, { user: "", todos: [], users: [] });
   const { user } = state;
 
   const backgroundImage = {

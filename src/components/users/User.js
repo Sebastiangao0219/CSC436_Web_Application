@@ -4,16 +4,13 @@ import { ThemeContext, StateContext } from "../hooks/Contexts";
 import { useResource } from "react-request-hook";
 import { Card } from "react-bootstrap";
 
-function User({author, authorID}) {
-  const { secondaryColor } = useContext(ThemeContext);
-  const { dispatch } = useContext(StateContext);
-
+function User({username, userId}) {
   return (
     <Card >
       <Card.Body >
         <Card.Title>
-          <Link style={{ color: '#000000' }} href={`/users/${authorID}`}>
-            {author}
+          <Link style={{ color: '#000000' }} href={`/users/${userId}`}>
+            {username}
           </Link>
         </Card.Title>
       </Card.Body>

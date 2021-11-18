@@ -6,6 +6,7 @@ import { useContext } from "react/cjs/react.development";
 function TodoList() {
   const { state } = useContext(StateContext);
   const { todos } = state;
+  console.log(todos);
   return (
     <div>
       {todos.map((t, i) => (

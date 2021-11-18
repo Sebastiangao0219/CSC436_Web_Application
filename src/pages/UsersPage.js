@@ -7,20 +7,20 @@ function UsersPage() {
     const { state, dispatch } = useContext(StateContext);
     const [users, getUsers] = useResource(() => ({
         url: "/users",
-        method: "GET",
-    }))
+        method: "get",
+    }));
     useEffect(getUsers, []);
     useEffect(() => {
+        console.log(users);
         if (users && users.data) {
-            dispatch({ type: "FETCH_USERS", users: users.data.reverse() });
+            dispatch({ type: "FETCH_USERS", users: users.data })
         }
     }, [users]);
     const { isLoading } = users;
     return (
         <>
-            {isLoading && "Users loading..."} <UsersList />
+            {isLoading && "Users Loading..."} <UsersList />
         </>
     )
 }
-
 export default UsersPage;
