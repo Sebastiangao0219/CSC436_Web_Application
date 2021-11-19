@@ -4,6 +4,13 @@ function userReducer(state, action) {
 
     case "REGISTER":
       return action.username;
+    // case "REGISTER":
+    //   const newUser = {
+    //     id: action.id,
+    //     username: action.username,
+    //     password: action.password,
+    //   };
+    //   return [newUser, ...state];
     case "LOGOUT":
       return "";
     default:
@@ -37,7 +44,7 @@ function todoReducer(state, action) {
     case "FETCH_TODOS":
       return action.todos;
     case "FETCH_TODOS_BY_USER":
-      return state.filter((t) => t.username !== action.author);
+      return state.filter((t) => t.author === action.author.username);
     default:
       return state;
   }
@@ -45,13 +52,6 @@ function todoReducer(state, action) {
 
 function usersReducer(state, action) {
   switch (action.type) {
-    case "REGISTER":
-      const newUser = {
-        id: action.id,
-        username: action.username,
-        password: action.password,
-      };
-      return [newUser, ...state];
     case "FETCH_USERS":
       return action.users;
     default:

@@ -32,8 +32,6 @@ function App() {
   });
 
   const [state, dispatch] = useReducer(appReducer, { user: "", todos: [], users: [] });
-  const { user } = state;
-
   const backgroundImage = {
     backgroundImage: `url(${background})`
   }

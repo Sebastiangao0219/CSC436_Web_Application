@@ -8,6 +8,14 @@ import TodoList from "../components/todos/TodoList";
 
 function ProfilePage({ id }) {
   const { dispatch } = useContext(StateContext);
+  const [user, getUser] = useResource(() => ({
+    url: `/users/${id}`,
+    method: "get",
+  }));
+
+  useEffect(getUser, [id]);
+
+
   const [todos, getTodos] = useResource(() => ({
     url: "/todos",
     method: "get",
@@ -20,27 +28,22 @@ function ProfilePage({ id }) {
   }, [todos]);
   const { isLoading } = todos;
 
-  const [user, getUser] = useResource(() => ({
-    url: `/users/${id}`,
-    method: "get",
-  }));
 
-  useEffect(getUser, [id]);
   useEffect(() => {
     if (user && user.data) {
-      dispatch({ type: "FETCH_TODOS_BY_USER", author: user.username });
+      console.log("checking" + user.data.username)
+      dispatch({ type: "FETCH_TODOS_BY_USER", author: user.data });
     }
   }, [todos]);
-  console.log("Checking for");
-  console.log(user);
+
   return (
-    <div>
-      <Button style={{ marginTop: 5, marginBottom: 5 }} href="/users">
-        Back to User List
-      </Button>
-      {user && user.data ? <User {...user.data} /> : "Loading"}
-      <TodoList />
-    </div>
+      <div>
+        <Button style={{ marginTop: 5, marginBottom: 5 }} href="/users">
+          Back to User List
+        </Button>
+        {user && user.data ? <User {...user.data} /> : "Loading"}
+        <TodoList />
+      </div>
   );
 }
 
