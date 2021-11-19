@@ -9,6 +9,7 @@ function User({username, userId}) {
     <Card >
       <Card.Body >
         <Card.Title>
+            Username:
           <Link style={{ color: '#000000' }} href={`/users/${userId}`}>
             {username}
           </Link>
