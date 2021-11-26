@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-navi";
-import { ThemeContext, StateContext } from "../hooks/Contexts";
+import { StateContext } from "../hooks/Contexts";
 import { useResource } from "react-request-hook";
 import { Card, Button } from "react-bootstrap";
 function Todo({
@@ -14,16 +14,16 @@ function Todo({
 }) {
   const { state, dispatch } = useContext(StateContext);
 
-  console.log("Todo Rendered");
+  console.log("todoId is: " + todoId);
+
   const [deletedTodo, deleteTodo] = useResource((todoId) => ({
-    url: `/todos/${todoId}`,
+    url: `/todo/${todoId}`,
     method: "delete",
     headers: {"Authorization": `${state.user.access_token}`},
   }));
-  console.log(todoId);
 
   const [toggledTodo, toggleTodo] = useResource((todoId, completed) => ({
-    url: `/todos/${todoId}`,
+    url: `/todo/${todoId}`,
     method: "patch",
     headers: {"Authorization": `${state.user.access_token}`},
     data: {
@@ -33,8 +33,9 @@ function Todo({
   }));
 
   useEffect(() => {
+    console.log("deletedTodo is: " + deletedTodo);
     if (deletedTodo && deletedTodo.data && deletedTodo.isLoading === false) {
-      dispatch({ type: "DELETE_TODO", todoId: deletedTodo.data._id });
+      dispatch({ type: "DELETE_TODO", todoId: todoId });
     }
   }, [deletedTodo]);
 
@@ -44,7 +45,7 @@ function Todo({
         type: "TOGGLE_TODO",
         complete: toggledTodo.data.complete,
         completedOn: toggledTodo.data.completeOn,
-        todoId: toggledTodo.data._id
+        todoId: todoId
       });
     }
   }, [toggledTodo]);
