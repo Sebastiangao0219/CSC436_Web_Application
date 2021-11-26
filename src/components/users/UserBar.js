@@ -10,7 +10,7 @@ function UserBar() {
   const [showRegister, setShowRegister] = useState(false);
   const { state } = useContext(StateContext);
 
-  if (state.user) {
+  if (state.user.username) {
     return <Logout />;
   } else {
     return (

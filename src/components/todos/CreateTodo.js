@@ -6,16 +6,17 @@ import { useNavigation } from "react-navi";
 function CreateTodo() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const { state, dispatch } = useContext(StateContext);
+  const { user } = state;
+
   const [todo, createTodo] = useResource(({ title, content, author }) => ({
-    url: "/todos",
+    url: "/todo",
     method: "post",
+    headers: { Authorization: `${state.user.access_token}` },
     data: { title, content, author },
   }));
 
   const navigation = useNavigation();
-
-  const { state, dispatch } = useContext(StateContext);
-  const { user } = state;
   function handleTitle(evt) {
     setTitle(evt.target.value);
   }
@@ -23,7 +24,7 @@ function CreateTodo() {
     setContent(evt.target.value);
   }
   function handleCreate() {
-    createTodo({ title, content, author: user });
+    createTodo({ title, content, author: user.username });
   }
 
   useEffect(() => {
@@ -33,7 +34,7 @@ function CreateTodo() {
         title: todo.data.title,
         content: todo.data.content,
         id: todo.data.id,
-        author: user,
+        author: user.username,
       });
       navigation.navigate(`/todo/${todo.data.id}`);
     }
@@ -47,7 +48,7 @@ function CreateTodo() {
       }}
     >
       <div>
-        Author: <b>{user}</b>
+        Author: <b>{user.username}</b>
       </div>
       <div>
         <label htmlFor="create-title">Title: </label>

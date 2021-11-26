@@ -1,7 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Link } from "react-navi";
-import { ThemeContext, StateContext } from "../hooks/Contexts";
-import { useResource } from "react-request-hook";
 import { Card } from "react-bootstrap";
 
 function User({username, userId}) {

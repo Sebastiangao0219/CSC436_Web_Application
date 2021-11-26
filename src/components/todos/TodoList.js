@@ -1,7 +1,7 @@
 import React from "react";
+import { useContext } from 'react/cjs/react.development';
 import Todo from "./Todo";
 import { StateContext } from "../hooks/Contexts";
-import { useContext } from "react/cjs/react.development";
 
 function TodoList() {
   const { state } = useContext(StateContext);
@@ -9,7 +9,9 @@ function TodoList() {
   console.log(todos);
   return (
     <div>
-      {todos.map((t, i) => (
+      {todos.length === 0 && <h2>No created todo task.</h2>}
+
+      {todos.length > 0 && todos.map((t, i) => (
         <Todo
           {...t}
           short={true}

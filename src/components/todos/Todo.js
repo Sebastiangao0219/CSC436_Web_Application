@@ -12,15 +12,7 @@ function Todo({
   todoId,
   short = false,
 }) {
-  const { secondaryColor } = useContext(ThemeContext);
   const { dispatch } = useContext(StateContext);
-
-  let processedContent = content;
-  if (short) {
-    if (content.length > 30) {
-      processedContent = content.substring(0, 30) + "...";
-    }
-  }
 
   console.log("Todo Rendered");
   const [deletedTodo, deleteTodo] = useResource((todoId) => ({
@@ -28,7 +20,7 @@ function Todo({
     method: "delete",
   }));
   console.log(todoId);
-  
+
   const [toggledTodo, toggleTodo] = useResource((todoId, completed) => ({
     url: `/todos/${todoId}`,
     method: "patch",
@@ -55,30 +47,57 @@ function Todo({
     }
   }, [toggledTodo]);
 
+  let processedContent = content;
+  if (short) {
+    if (content.length > 30) {
+      processedContent = content.substring(0, 30) + "...";
+    }
+  }
+
   return (
-    <Card >
-      <Card.Body >
+    <Card>
+      <Card.Body>
         <Card.Title>
-          <Link style={{ color: '#000000' }} href={`/todo/${todoId}`}>
+          <Link style={{ color: "#000000" }} href={`/todo/${todoId}`}>
             {title}
           </Link>
         </Card.Title>
         <Card.Subtitle>
-          <i style={{color: "#000000"}}>
+          <i style={{ color: "#000000" }}>
             Created by <b>{author}</b>
           </i>
         </Card.Subtitle>
-        <Card.Text >{processedContent}</Card.Text>
-        <input type="checkbox" checked={complete} onChange={e => {toggleTodo(todoId, e.target.checked)}} />
+        <Card.Text>{processedContent}</Card.Text>
+        <input
+          type="checkbox"
+          checked={complete}
+          onChange={(e) => {
+            toggleTodo(todoId, e.target.checked);
+          }}
+        />
         {short && (
-          <Button variant="blank" href={`/todo/${todoId}`} style={{backgroundColor: '#94b0ab'}}>
+          <Button
+            variant="blank"
+            href={`/todo/${todoId}`}
+            style={{ backgroundColor: "#94b0ab" }}
+          >
             View Full Content
           </Button>
         )}
-        <Button variant="blank" onClick={() => {deleteTodo(todoId)}} style={{backgroundColor: '#94b0f1'}}>
+        <Button
+          variant="blank"
+          onClick={() => {
+            deleteTodo(todoId);
+          }}
+          style={{ backgroundColor: "#94b0f1" }}
+        >
           Delete Todo
         </Button>
-        {complete && <i>Completed on: {new Date(completedOn).toLocaleDateString('en-us')}</i>}
+        {complete && (
+          <i>
+            Completed on: {new Date(completedOn).toLocaleDateString("en-us")}
+          </i>
+        )}
       </Card.Body>
     </Card>
   );

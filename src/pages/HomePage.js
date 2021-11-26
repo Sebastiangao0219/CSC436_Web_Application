@@ -6,19 +6,33 @@ import TodoList from "../components/todos/TodoList";
 function HomePage() {
   const { state, dispatch } = useContext(StateContext);
   const [todos, getTodos] = useResource(() => ({
-    url: "/todos",
-    method: "get",
+    url: '/todo',
+    method: 'get',
+    headers: { "Authorization": `${state.user.access_token}` },
   }));
-  useEffect(getTodos, []);
+
   useEffect(() => {
-    if (todos && todos.data) {
-      dispatch({ type: "FETCH_TODOS", todos: todos.data.reverse() });
+    if (state.user.access_token) {
+      getTodos();
+    }
+  }, []);
+
+  useEffect(() => {
+    getTodos();
+  }, [state.user.access_token]);
+
+  useEffect(() => {
+    if (todos && todos.isLoading === false && todos.data) {
+      dispatch({ type: "FETCH_TODOS", todos: todos.data.todos });
     }
   }, [todos]);
+
   const { isLoading } = todos;
+
   return (
     <>
       {isLoading && "Todos loading..."} <TodoList />
+      {/* {isLoading && "Todos loading..."} */}
     </>
   );
 }
