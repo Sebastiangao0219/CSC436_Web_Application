@@ -34,7 +34,7 @@ function Todo({
 
   useEffect(() => {
     if (deletedTodo && deletedTodo.data && deletedTodo.isLoading === false) {
-      dispatch({ type: "DELETE_TODO", todoId: todoId });
+      dispatch({ type: "DELETE_TODO", todoId: deletedTodo.data._id });
     }
   }, [deletedTodo]);
 
@@ -44,7 +44,7 @@ function Todo({
         type: "TOGGLE_TODO",
         complete: toggledTodo.data.complete,
         completedOn: toggledTodo.data.completeOn,
-        todoId,
+        todoId: toggledTodo.data._id
       });
     }
   }, [toggledTodo]);
