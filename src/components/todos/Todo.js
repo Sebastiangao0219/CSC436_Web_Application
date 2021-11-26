@@ -16,18 +16,18 @@ function Todo({
 
   console.log("todoId is: " + todoId);
 
-  const [deletedTodo, deleteTodo] = useResource((todoId) => ({
+  const [deletedTodo, deleteTodo] = useResource(() => ({
     url: `/todo/${todoId}`,
     method: "delete",
     headers: {"Authorization": `${state.user.access_token}`},
   }));
 
-  const [toggledTodo, toggleTodo] = useResource((todoId, completed) => ({
+  const [toggledTodo, toggleTodo] = useResource((complete) => ({
     url: `/todo/${todoId}`,
-    method: "patch",
+    method: "put",
     headers: {"Authorization": `${state.user.access_token}`},
     data: {
-      complete: completed,
+      complete: complete,
       completedOn: Date.now(),
     },
   }));
@@ -35,7 +35,7 @@ function Todo({
   useEffect(() => {
     console.log("deletedTodo is: " + deletedTodo);
     if (deletedTodo && deletedTodo.data && deletedTodo.isLoading === false) {
-      dispatch({ type: "DELETE_TODO", todoId: todoId });
+      dispatch({ type: "DELETE_TODO", todoId: deletedTodo.data._id });
     }
   }, [deletedTodo]);
 
@@ -43,9 +43,9 @@ function Todo({
     if (toggledTodo && toggledTodo.data && toggledTodo.isLoading === false) {
       dispatch({
         type: "TOGGLE_TODO",
-        complete: toggledTodo.data.complete,
+        complete: !toggledTodo.data.complete,
         completedOn: toggledTodo.data.completeOn,
-        todoId: todoId
+        todoId: toggledTodo.data._id
       });
     }
   }, [toggledTodo]);

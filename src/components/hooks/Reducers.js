@@ -9,7 +9,7 @@ function userReducer(state, action) {
       }
     case "LOGOUT":
       return { 
-        'username': undefined,
+        'username': action.username,
         'access_token': undefined
       }
     default:
@@ -31,15 +31,15 @@ function todoReducer(state, action) {
       return [newTodo, ...state];
     case "TOGGLE_TODO":
       return state.map((t) => {
-        if (t.id === action.todoId) {
+        if (t._id === action.todoId) {
           t.complete = action.complete;
-          t.completeOn = Date.now();
+          t.completeOn = action.completeOn;
         }
         return t;
       });
 
     case "DELETE_TODO":
-      return state.filter((t) => t.id !== action.todoId);
+      return state.filter((t) => t._id !== action.todoId);
     case "FETCH_TODOS":
       return action.todos;
     case "FETCH_TODOS_BY_USER":

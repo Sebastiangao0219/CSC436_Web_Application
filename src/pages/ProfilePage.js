@@ -26,12 +26,14 @@ function ProfilePage({ id }) {
       dispatch({ type: "FETCH_TODOS", todos: todos.data });
     }
   }, [todos]);
+  console.log("todos are " + todos);
   const { isLoading } = todos;
 
 
   useEffect(() => {
-    if (user && user.data) {
-      console.log("checking" + user.data.username)
+    if (user) {
+      console.log("user " + user)
+      console.log("user.data " + user.data)
       dispatch({ type: "FETCH_TODOS_BY_USER", author: user.data });
     }
   }, [todos]);

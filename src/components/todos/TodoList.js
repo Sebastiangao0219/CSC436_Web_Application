@@ -9,7 +9,7 @@ function TodoList() {
   console.log(todos);
   return (
     <div>
-      {todos.length === 0 && <h2>No created todo task.</h2>}
+      {todos.length === 0 && <h2>Please login to view your todo tasks.</h2>}
 
       {todos.length > 0 && todos.map((t, i) => (
         <Todo
@@ -19,7 +19,7 @@ function TodoList() {
           author={t.author}
           content={t.content}
           key={"todo-" + i}
-          todoId={t.id}
+          todoId={t._id}
         />
       ))}
     </div>

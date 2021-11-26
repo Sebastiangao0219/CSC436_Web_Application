@@ -9,7 +9,7 @@ function UsersList() {
   return (
     <div>
       {users.map((u, i) => (
-        <User {...u} username={u.username} userId={u.id} key={"user-" + i} />
+        <User {...u} username={u.username} userId={u._id} key={"user-" + i} />
       ))}
     </div>
   );
