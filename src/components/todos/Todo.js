@@ -12,18 +12,20 @@ function Todo({
   todoId,
   short = false,
 }) {
-  const { dispatch } = useContext(StateContext);
+  const { state, dispatch } = useContext(StateContext);
 
   console.log("Todo Rendered");
   const [deletedTodo, deleteTodo] = useResource((todoId) => ({
     url: `/todos/${todoId}`,
     method: "delete",
+    headers: {"Authorization": `${state.user.access_token}`},
   }));
   console.log(todoId);
 
   const [toggledTodo, toggleTodo] = useResource((todoId, completed) => ({
     url: `/todos/${todoId}`,
     method: "patch",
+    headers: {"Authorization": `${state.user.access_token}`},
     data: {
       complete: completed,
       completedOn: Date.now(),
