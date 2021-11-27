@@ -22,7 +22,7 @@ function Todo({
     headers: {"Authorization": `${state.user.access_token}`},
   }));
 
-  const [toggledTodo, toggleTodo] = useResource((complete) => ({
+  const [toggledTodo, toggleTodo] = useResource((todoId, complete) => ({
     url: `/todo/${todoId}`,
     method: "put",
     headers: {"Authorization": `${state.user.access_token}`},
@@ -43,7 +43,7 @@ function Todo({
     if (toggledTodo && toggledTodo.data && toggledTodo.isLoading === false) {
       dispatch({
         type: "TOGGLE_TODO",
-        complete: !toggledTodo.data.complete,
+        complete: toggledTodo.data.complete,
         completedOn: toggledTodo.data.completeOn,
         todoId: toggledTodo.data._id
       });
