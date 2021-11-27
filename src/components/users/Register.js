@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useContext } from 'react/cjs/react.development';
+import React, { useState, useEffect, useContext } from "react";
+// import { useContext } from "react/cjs/react.development";
 import { StateContext } from "../hooks/Contexts";
 import { useResource } from "react-request-hook";
 import { Modal, Form, Button } from "react-bootstrap";
@@ -12,40 +12,26 @@ function Register({ show, handleClose }) {
     passwordRepeat: "",
   });
 
-  // const [user, register] = useResource((username, password) => ({
-  //   url: "/users",
-  //   method: "post",
-  //   data: { username, password },
-  // }));
-
-  const [ status, setStatus ] = useState("");
-  const [ user, register ] = useResource((username, password) => ({
-    url: 'auth/register',
-    method: 'POST',
-    data: { username, password, 'passwordConfirmation': password }
-  }))
-
-  // useEffect(() => {
-  //   if (user && user.data) {
-  //     dispatch({ type: "REGISTER", username: user.data.username });
-  //   }
-  // }, [user]);
+  const [status, setStatus] = useState("");
+  const [user, register] = useResource((username, password) => ({
+    url: "auth/register",
+    method: "POST",
+    data: { username, password, passwordConfirmation: password },
+  }));
 
   useEffect(() => {
-      if (user && user.isLoading === false && (user.data || user.error)) {
-        if (user.error) {
-          console.log(user)
-          setStatus("Registration failed, please try again later.")
-          alert("fail")
-        } else {
-          console.log(user)
-          setStatus("Registration successful. You may now login.")
-          alert("success")
-        }
-          //dispatch({ type: 'REGISTER', username: user.data.username })
-      }
-    }, [user])
-    
+    if (user && user.isLoading === false && (user.data || user.error)) {
+      if (user.error) {
+        console.log(user);
+        setStatus("Registration failed, please try again later.");
+        alert("fail");
+      } else {
+        console.log(user);
+        setStatus("Registration successful. You may now login.");
+        alert("success");
+      } //dispatch({ type: 'REGISTER', username: user.data.username })
+    }
+  }, [user]);
 
   return (
     <Modal show={show} onHide={handleClose}>

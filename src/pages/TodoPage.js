@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from "react";
 import { Link } from "react-navi";
-import { Button } from "react-bootstrap";
 import { useResource } from "react-request-hook";
 import { StateContext } from "../components/hooks/Contexts";
 import Todo from "../components/todos/Todo";
@@ -13,7 +12,6 @@ function TodoPage({ id }) {
     method: "get",
   }));
   useEffect(getTodo, [id]);
-
   return (
     <div>
       {todo && todo.data ? <Todo {...todo.data} /> : "Loading..."}

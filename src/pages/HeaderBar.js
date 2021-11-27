@@ -37,7 +37,6 @@ function HeaderBar({ setTheme }) {
                   <Link href="/todo/create">Create New Todo</Link>
                 </Nav.Link>
               }
-              {/* <ChangeTheme theme={theme} setTheme={setTheme} /> */}
             </Nav>
             <React.Suspense fallback={"Loading..."}>
               <UserBar />

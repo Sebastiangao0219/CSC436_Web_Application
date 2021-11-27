@@ -27,12 +27,11 @@ function HomePage() {
     }
   }, [todos]);
 
-  const { isLoading } = todos;
+  const { data, isLoading } = todos;
 
   return (
     <>
       {isLoading && "Todos loading..."} <TodoList />
-      {/* {isLoading && "Todos loading..."} */}
     </>
   );
 }

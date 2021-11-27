@@ -32,8 +32,6 @@ function ProfilePage({ id }) {
 
   useEffect(() => {
     if (user) {
-      console.log("user " + user)
-      console.log("user.data " + user.data)
       dispatch({ type: "FETCH_TODOS_BY_USER", author: user.data });
     }
   }, [todos]);
