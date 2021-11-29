@@ -25,8 +25,8 @@ function todoReducer(state, action) {
         title: action.title,
         content: action.content,
         author: action.author,
-        complete: false,
-        completedOn: new Date().toLocaleDateString('en-us').toString(),
+        complete: action.complete,
+        completedOn: action.completeOn,
       };
       return [newTodo, ...state];
     case "TOGGLE_TODO":

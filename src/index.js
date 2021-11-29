@@ -7,8 +7,8 @@ import { RequestProvider } from "react-request-hook";
 import background from "./assets/bg1.jpg";
 
 const axiosInstance = axios.create({
-  //baseURL: "http://localhost:3000/api/",
-  baseURL: "/",
+  baseURL: "http://localhost:3000/api/",
+  // baseURL: "/",
 });
 
 const backgroundImage = {

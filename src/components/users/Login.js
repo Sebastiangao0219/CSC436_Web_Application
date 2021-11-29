@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-// import { useContext } from 'react/cjs/react.development';
+import React, { useState, useEffect } from "react";
+import { useContext } from 'react/cjs/react.development';
 import { StateContext } from "../hooks/Contexts";
 import { useResource } from "react-request-hook";
 import { Modal, Form, Button } from "react-bootstrap";
@@ -31,7 +31,6 @@ function Login({ show, handleClose }) {
         alert('failed')
       } else {
         setLoginFailed(false);
-        console.log(user.data);
         dispatch({ type: "LOGIN", username, access_token: user.data.access_token});
       }
     }

@@ -27,7 +27,7 @@ function HeaderBar({ setTheme }) {
               className="d-inline-block align-top"
               alt="Sebastian's Todo List"
             />
-            {/* <Header text="Sebastian's Todo List" /> */}
+            <Header text="User List" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

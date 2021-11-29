@@ -7,10 +7,11 @@ import { StateContext } from "../components/hooks/Contexts";
 import TodoList from "../components/todos/TodoList";
 
 function ProfilePage({ id }) {
-  const { dispatch } = useContext(StateContext);
+  const { state, dispatch } = useContext(StateContext);
   const [user, getUser] = useResource(() => ({
     url: `/users/${id}`,
     method: "get",
+    headers: { "Authorization": `${state.user.access_token}` },
   }));
 
   useEffect(getUser, [id]);
@@ -19,6 +20,7 @@ function ProfilePage({ id }) {
   const [todos, getTodos] = useResource(() => ({
     url: "/todos",
     method: "get",
+    headers: { "Authorization": `${state.user.access_token}` },
   }));
   useEffect(getTodos, []);
   useEffect(() => {

@@ -52,6 +52,7 @@ function CreateTodo() {
       </div>
       <div>
         <label htmlFor="create-title">Title: </label>
+        <br />
         <input
           type="text"
           value={title}
@@ -60,7 +61,9 @@ function CreateTodo() {
           id="create-title"
         />
       </div>
+      <label htmlFor="create-title">Content: </label><br/>
       <textarea value={content} onChange={handleContent} />
+      <br/>
       <input type="submit" value="Create" />
     </form>
   );
